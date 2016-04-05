@@ -81,11 +81,9 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+var dooblydoos = "%.^>";
+
 function sendMessage(message){
-    lastFirstChar = message.substring(0,1);
-    lastSecondChar = message.substring(1,2);
-    lastFirstWord = message.split(" ");
-    
 	$("#robinSendMessage > input[type='text']").val(message);
 	$("#robinSendMessage > input[type='submit']").click();
 }
@@ -242,7 +240,7 @@ function newMessageHandler(records) {
         //that is already your vote
         if (!searchMessage($(".robin-message--message").text(), "that is already your vote"))
             sendMessage("Hello. I am John Madden. A human participant could not be found.");
-	}, 8001);
+	}, 5 * 8001);
 	
 	setInterval(processQueue, waitToSendTime);
 	
