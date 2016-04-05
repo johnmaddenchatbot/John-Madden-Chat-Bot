@@ -154,8 +154,14 @@ function processReplies(msg, timestamp, user, msgText) {
         if (searchMessage(msgText, "fact"))
             addToSendQueue("[Madden Facts]" + facts[getRandomInt(0, facts.length - 1)]);
         
-        if (searchMessageCase(msgText, "CATEGORY"))
+        if (searchMessage(msgText, "CATEGORY"))
             addToSendQueue("$ CATEGORY: " + trivia_questions[getRandomInt(0, trivia_questions.length - 1)]);
+        
+        if (searchMessage(msgText, "goodnight") || searchMessage(msgText, "good night") || searchMessage(msgText, "to bed"))
+            addToSendQueue("John Madden wishes you a good night " + user + "!");
+        
+        if (searchMessage(msgText, "mooo"))
+            addToSendQueue("MOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
         
         if (isSwear(msgText))
             addToSendQueue("/me thinks " + user + " has a potty mouth");
