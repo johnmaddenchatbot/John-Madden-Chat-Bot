@@ -29,7 +29,9 @@ var facts = [
     "One job that Madden had in high school was as a golf caddy at the San Francisco Golf Club.",
     "Madden was given a football scholarship to the University of Oregon.",
     "In 1958, Madden was drafted by the Philadelphia Eagles in the 21st round.",
-    "John Madden is afraid of airplanes."
+    "John Madden is afraid of airplanes.",
+    "John Madden does not like butter packets",
+    "John Madden is incapable of opening butter packets"
 ];
 
 var swears = [
@@ -152,7 +154,7 @@ function processReplies(msg, timestamp, user, msgText) {
             addToSendQueue("Fucking butter packets!");
         
         if (searchMessage(msgText, "fact"))
-            addToSendQueue("[Madden Facts]" + facts[getRandomInt(0, facts.length - 1)]);
+            addToSendQueue("[Madden Facts] " + facts[getRandomInt(0, facts.length - 1)]);
         
         if (searchMessage(msgText, "CATEGORY"))
             addToSendQueue("$ CATEGORY: " + trivia_questions[getRandomInt(0, trivia_questions.length - 1)]);
@@ -162,6 +164,12 @@ function processReplies(msg, timestamp, user, msgText) {
         
         if (searchMessage(msgText, "mooo"))
             addToSendQueue("MOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+        
+        if (searchMessage(msgText, "!addbrick") || searchMessage(msgText, "!removebrick") || searchMessage(msgText, "!total"))
+            addToSendQueue("!addbrick");
+        
+        if (searchMessage(msgText, "pay for") && searchMessage(msgText, "wall"))
+            addToSendQueue("John Madden won't pay for the wall.");
         
         if (isSwear(msgText))
             addToSendQueue("/me thinks " + user + " has a potty mouth");
