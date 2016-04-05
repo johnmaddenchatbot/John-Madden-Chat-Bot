@@ -48,6 +48,20 @@ var swears = [
     "bitch"
 ];
 
+var trivia_questions = [
+    "History || When was John Madden born?",
+    "History || When did John Madden join the AFL?",
+    "Geography || Where does John Madden currently live?",
+    "History || What networks has John Madden worked for?",
+    "History || When did John Madden retire from broadcasting?",
+    "Geography || Wherre was John Madden born?",
+    "Geography || Where did John Madden graduate school from?",
+    "History || Madden was hired by Al Davis as linebackers coach for the AFL's Oakland Raiders in what year?",
+    "Mathematics || How old is John Madden?",
+    "History || When did John Madden move with family to Daly City, California?",
+    "History || Whene did John Madden become head coach at Allan Hancock Junior College?"
+];
+
 function isSwear(message) {
     for (var i = 0; i < swears.length; i++)
         if (searchMessage(message, swears[i]))
@@ -59,6 +73,10 @@ function isSwear(message) {
 function getTime() {
 	var d = new Date();
     return d.getTime();
+}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function sendMessage(message){
@@ -127,7 +145,7 @@ function processReplies(msg, timestamp, user, msgText) {
         if (searchMessage(msgText, "GROW YOUR"))
             addToSendQueue("ヽ༼ຈل͜ຈ༽ﾉ GROW YOUR JOHN MADDEN ヽ༼ຈل͜ຈ༽ﾉ");
         
-        if (searchMessage(msgText, "RAISE YOUR") || searchMessage(msgText, "ＰＲＡＩＳＥ"))
+        if (searchMessage(msgText, "RAISE YOUR") || searchMessage(msgText, "praise") || searchMessage(msgText, "ＰＲＡＩＳＥ"))
             addToSendQueue("ヽ༼ຈل͜ຈ༽ﾉＰＲＡＩＳＥ ＹＯＵＲ ＪＯＨＮ ＭＡＤＤＥＮヽ༼ຈل͜ຈ༽ﾉ");
         
         if (searchMessage(msgText, "popcorn"))
@@ -135,6 +153,9 @@ function processReplies(msg, timestamp, user, msgText) {
         
         if (searchMessage(msgText, "fact"))
             addToSendQueue("[Madden Facts]" + facts[getRandomInt(0, facts.length - 1)]);
+        
+        if (searchMessageCase(msgText, "CATEGORY"))
+            addToSendQueue("$ CATEGORY: " + trivia_questions[getRandomInt(0, trivia_questions.length - 1)]);
         
         if (isSwear(msgText))
             addToSendQueue("/me thinks " + user + " has a potty mouth");
