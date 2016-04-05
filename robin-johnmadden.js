@@ -82,9 +82,9 @@ function getRandomInt(min, max) {
 }
 
 function sendMessage(message){
-    lastFirstChar = lastMessage.substring(0,1);
-    lastSecondChar = lastMessage.substring(1,2);
-    lastFirstWord = lastMessage.split(" ");
+    lastFirstChar = message.substring(0,1);
+    lastSecondChar = message.substring(1,2);
+    lastFirstWord = message.split(" ");
     
 	$("#robinSendMessage > input[type='text']").val(message);
 	$("#robinSendMessage > input[type='submit']").click();
@@ -140,7 +140,7 @@ function processReplies(msg, timestamp, user, msgText) {
             addToSendQueue("John Madden is a human!");
         
         if (searchMessage(msgText, "mute"))
-            addToSendQueue("John Madden would'nt mute me!");
+            addToSendQueue("John Madden wouldn't mute me!");
         
         if (searchMessage(msgText, "uuu"))
             addToSendQueue("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
@@ -236,6 +236,13 @@ function newMessageHandler(records) {
 	setTimeout(function(){
 		sendMessage("/vote grow");
 	}, 5 * 1000);
+    
+    // 8 Seconds after we join, greet the chat
+	setTimeout(function(){
+        //that is already your vote
+        if (!searchMessage($(".robin-message--message").text(), "that is already your vote"))
+            sendMessage("Hello. I am John Madden. A human participant could not be found.");
+	}, 8001);
 	
 	setInterval(processQueue, waitToSendTime);
 	
