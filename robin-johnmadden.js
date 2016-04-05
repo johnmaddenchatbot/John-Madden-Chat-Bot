@@ -15,7 +15,7 @@ var username = $(".user a").text().split(" ")[0]; // dont change this. it is aut
 var lastSendTime = 0;
 var waitToSendTime = 10001;
 
-var sendQueue;
+var lastMessage;
 var maxQueueSize = 4;
 
 var lastUser = "";
@@ -82,6 +82,10 @@ function getRandomInt(min, max) {
 }
 
 function sendMessage(message){
+    lastFirstChar = lastMessage.substring(0,1);
+    lastSecondChar = lastMessage.substring(1,2);
+    lastFirstWord = lastMessage.split(" ");
+    
 	$("#robinSendMessage > input[type='text']").val(message);
 	$("#robinSendMessage > input[type='submit']").click();
 }
@@ -168,7 +172,7 @@ function processReplies(msg, timestamp, user, msgText) {
         if (searchMessage(msgText, "!addbrick") || searchMessage(msgText, "!removebrick") || searchMessage(msgText, "!total"))
             addToSendQueue("!addbrick");
         
-        if (searchMessage(msgText, "pay for") && searchMessage(msgText, "wall"))
+        if ((searchMessage(msgText, "pay for") || searchMessage(msgText, "build")) && searchMessage(msgText, "wall"))
             addToSendQueue("John Madden won't pay for the wall.");
         
         if (isSwear(msgText))
@@ -200,6 +204,8 @@ function newMessageHandler(records) {
             lastUser = user;
         else
             user = lastUser;
+        
+        lastMessage = msgText;
 		
 		processReplies(msg, timestamp, user, msgText);
 		
